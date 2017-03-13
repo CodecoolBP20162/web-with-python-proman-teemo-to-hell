@@ -23,30 +23,30 @@
             </div>
         </div>
     </div>
+
+
 </header>
 
-<ul id="grid-wrapper">
-<a href="/dsad">
-    <li class = "card">
-    <div class = "container-card">jbkjfvnkjkdsjk</div>
-    <div class = "title-bar">
-        <h1 class ="card-title">webstore</h1>
-       <div class ="icon">&times;</div>
-    </div>
 
-</li>
-    <li class = "card">
-    <div class = "container-card"></div>
-    <div class = "title-bar">
-        <h1 class ="card-title">új tábla létrehozása</h1>
-    </div>
-
-</li>
-</a>
-</ul>
+<script type="text/javascript">
+function showStuff(id, text, btn) {
+    document.getElementById(id).style.display = 'block';
+    // hide the lorem ipsum text
+    document.getElementById(text).style.display = 'none';
+    // hide the link
+    btn.style.display = 'none';
+}
+</script>
 
 
-<script src="static/java.js"></script>
+<td class="post">
+
+<a href="#" onclick="showStuff('answer1', 'text1', this); return false;">Új tábla létrehozása...</a>
+<span id="answer1" style="display: none;">
+<textarea rows="10" cols="20"></textarea>
+</span>
+
+<span id="text1"></span>
+</td>
 </body>
 </html>
-
