@@ -1024,7 +1024,7 @@ header nav a:hover {
 #grid-wrapper{
   width: 100%;
   margin: 0 auto 20px auto;
-  text-align: left;
+  text-align: center;
 }
 
 .card:hover{
@@ -1055,12 +1055,12 @@ header nav a:hover {
   background: rgba(0,0,0,0.3)
 }
 
-h1.card-title{
+.card-title{
   top: 50%;
   transform: translateY(-50%);
   position:relative;
   display: inline-block;
-  color: #fff;
+  color: white;
   font-size:18px;
   font-family:monospace;
   left: 18px;
