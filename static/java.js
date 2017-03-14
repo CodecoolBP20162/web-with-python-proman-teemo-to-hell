@@ -4,6 +4,11 @@ $(document).ready(function () {
         this.name = name;
     }
 
+    //this function clears the textfield (after pressing the button)
+    function clearTextfield(){
+     document.getElementById('textform').value = "";
+    };
+
     var newcard = "<li class='card'>" +
         "<div class='title-bar'>" +
         "<div class='card-title'></div>" +
@@ -21,8 +26,16 @@ $(document).ready(function () {
     $("#save-button").click(function () {
         $("#grid-wrapper").append(newcard);
         localStorage.setItem("name1", "webstore1");
-    })
 
+        clearTextfield();
+
+        //closes the window
+        setTimeout(function () {
+            $('.panel').slideToggle(600);
+        }, 800);
+    });
+
+    //toggles the form window
     $('.pull-me').click(function () {
         $('.panel').slideToggle(200);
     });
@@ -42,7 +55,8 @@ $(document).ready(function () {
     var btns = document.querySelectorAll('button');
     for (var i = btns.length - 1; i >= 0; i--) {
         btns[i].addEventListener('click', loading);
-    }
-    ;
+    };
+
+
 
 })

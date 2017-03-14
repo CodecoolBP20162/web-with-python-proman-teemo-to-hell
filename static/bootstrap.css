@@ -1097,14 +1097,9 @@ body {
   background: #1e62d1;
 }
 
-.pull-me{
-    -webkit-box-shadow: 0 0 8px #FFD700;
-    -moz-box-shadow: 0 0 8px #FFD700;
-    box-shadow: 0 0 8px #FFD700;
-    cursor:pointer;
-}
 .panel {
-	background: white;
+	background: #424242;
+    color:white;
     background-size:90% 90%;
     width: 250px;
     height:200px;
@@ -1129,16 +1124,22 @@ body {
 	margin:0;
 	padding:0;
 }
+
+.pull-me{
+    -webkit-box-shadow: 0 0 8px black;
+    -moz-box-shadow: 0 0 8px black;
+    box-shadow: 0 0 8px black;
+    cursor:pointer;
+}
+
 .pull-me {
-	display:block;
-    position:relative;
-    right:-25px;
-    width:150px;
+	position:relative;
+    display:block;
+    width:250px;
     height:50px;
 	font-family:arial,sans-serif;
-    font-size:14px;
-	color:#ffffff;
-    background:#424242;
+	color:white;
+    background:#212423;
 	text-decoration:none;
     -moz-border-bottom-left-radius:5px;
     -moz-border-bottom-right-radius:5px;
@@ -1161,7 +1162,7 @@ body {
 button {
 	position:relative;
 	border:0;
-	margin:0;
+    /*margin-bottom:3px;*/
 	padding:0;
 	cursor:pointer;
 	font-size:1rem;
