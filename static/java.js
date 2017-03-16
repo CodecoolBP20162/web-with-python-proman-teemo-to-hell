@@ -1,61 +1,75 @@
 /**
  * Created by bezi on 2017.03.13..
  */
-
-$(document).ready(function () {
-
-    localStorage.boardStorage = {};
-    function Board(name) {
-        this.name = name;
-    }
-
-    //this function clears the textfield (after pressing the button)
-    function clearTextfield(){
+function clearTextfield(){
      document.getElementById('textform').value = "";
     }
 
-
-
-    // for (var key in localStorage) {
-    //     var card = "<li class='card'>" +
-    //         "<div class='title-bar'>" +
-    //         "<div class='card-title'>" + localStorage.getItem("name1") + "</div>" +
-    //         "</div>" +
-    //         "</li>";
-    //     document.getElementById("grid-wrapper").innerHTML = card;
-    // }
-
-    $("#save-button").click(function () {
-        // test phase
+    function createObjectforCard(title, description=false) {
+        var card_object = {};
         var target = $("#grid-wrapper");
         var card_id = target.children().length;
-        var title = $('#textform').val();
 
-        var card_object = {};
         card_object.title = title;
         card_object.id = card_id;
-        card_object.description = "";
+        card_object.description = description;
 
+        var card_name = "card"+card_id;
+        localStorage.setItem(card_name, JSON.stringify(card_object));
+        createCard(title);
 
+    }
+
+    function createCard(title,description='') {
+
+        var target = $("#grid-wrapper");
         var newcard = "<li class='card'>" +
-        "<a href='/b' id='0'>" +
+        "<div class='container-card'>"
+        + description +
+        "</div><a href='/b' id='0'>" +
         "<div class='title-bar'>" +
-        "<div class='card-title'>" + card_object.title + "</div>" +
+        "<div class='card-title'>" + title + "</div>" +
         "</div>" +
         "</a>" +
         "</li>";
 
+        target.append(newcard);}
 
-        // end of test phase
 
-        target.append(newcard);
-        var card_name = "card"+card_id;
-        localStorage.setItem(card_name, JSON.stringify(card_object));
 
-        // console.log(JSON.parse(localStorage.getItem(card_name)));
+        // console.log(JSON.parse(localStorage.getItem(card_name)).title);
         // ezzel lehet megkapni egy kártya objektumot (még nemtom hova fog kerülni)
 
 
+$(document).ready(function () {
+
+    // localStorage.boardStorage = {};
+    // function Board(name) {
+    //     this.name = name;
+    // }
+
+    //this function clears the textfield (after pressing the button)
+
+
+
+    for (var key in localStorage) {
+        // keys store the title names
+        var local_key = JSON.parse(localStorage.getItem(key));
+        var title = local_key.title;
+        // var description = local_key.description;
+        // if (description === "false") {
+        createCard(title);
+        // }
+        // else {
+        // createCard(title, description);
+        // }
+
+    }
+
+    $("#save-button").click(function () {
+        // test phase
+        var title = $('#textform').val();
+        createObjectforCard(title);
         clearTextfield();
 
         //closes the window
