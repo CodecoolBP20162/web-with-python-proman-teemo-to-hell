@@ -3,6 +3,7 @@
  */
 
 $(document).ready(function () {
+
     localStorage.boardStorage = {};
     function Board(name) {
         this.name = name;
@@ -14,23 +15,46 @@ $(document).ready(function () {
     }
 
 
-    var newcard = "<li class='card'>" +
-        "<div class='title-bar'>" +
-        "<div class='card-title'></div>" +
-        "</div>" +
-        "</li>";
-    for (var key in localStorage) {
-        var card = "<li class='card'>" +
-            "<div class='title-bar'>" +
-            "<div class='card-title'>" + localStorage.getItem("name1") + "</div>" +
-            "</div>" +
-            "</li>";
-        document.getElementById("grid-wrapper").innerHTML = card;
-    }
+
+    // for (var key in localStorage) {
+    //     var card = "<li class='card'>" +
+    //         "<div class='title-bar'>" +
+    //         "<div class='card-title'>" + localStorage.getItem("name1") + "</div>" +
+    //         "</div>" +
+    //         "</li>";
+    //     document.getElementById("grid-wrapper").innerHTML = card;
+    // }
 
     $("#save-button").click(function () {
-        $("#grid-wrapper").append(newcard);
-        localStorage.setItem("name1", "webstore1");
+        // test phase
+        var target = $("#grid-wrapper");
+        var card_id = target.children().length;
+        var title = $('#textform').val();
+
+        var card_object = {};
+        card_object.title = title;
+        card_object.id = card_id;
+        card_object.description = "";
+
+
+        var newcard = "<li class='card'>" +
+        "<a href='/b' id='0'>" +
+        "<div class='title-bar'>" +
+        "<div class='card-title'>" + card_object.title + "</div>" +
+        "</div>" +
+        "</a>" +
+        "</li>";
+
+
+        // end of test phase
+
+        target.append(newcard);
+        var card_name = "card"+card_id;
+        localStorage.setItem(card_name, JSON.stringify(card_object));
+
+        // console.log(JSON.parse(localStorage.getItem(card_name)));
+        // ezzel lehet megkapni egy kártya objektumot (még nemtom hova fog kerülni)
+
 
         clearTextfield();
 
@@ -63,6 +87,7 @@ $(document).ready(function () {
     }
 
 
+    });
 
 
-});
+
