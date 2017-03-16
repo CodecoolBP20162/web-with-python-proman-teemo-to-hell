@@ -1003,6 +1003,17 @@ header h1{
   font-size: 25px;
   font-weight: 700
 }
+
+
+/*kell majd rendes hover effect*/
+
+header h1:hover{
+  background: lightblue;
+  box-shadow:inset 0 0 0 10px rgba(0,0,0);
+
+}
+
+
 header nav{
   text-align:right
 }
@@ -1023,6 +1034,12 @@ header nav a:hover {
   width: 100%;
   margin: 0 auto 20px auto;
   text-align: center;
+}
+
+
+#container-head p{
+  text-align: left;
+  font-size:30px;
 }
 
 .card:hover{
@@ -1098,9 +1115,9 @@ body {
 }
 
 .pull-me{
-    -webkit-box-shadow: 0 0 8px #FFD700;
-    -moz-box-shadow: 0 0 8px #FFD700;
-    box-shadow: 0 0 8px #FFD700;
+    -webkit-box-shadow: 0 0 8px ;
+    -moz-box-shadow: 0 0 8px black;
+    box-shadow: 0 0 8px black;
     cursor:pointer;
 }
 .panel {
@@ -1116,10 +1133,10 @@ body {
     text-align:center;
 }
 
-/*.panel b{*/
-    /*font-weight:bold;*/
-
-/*}*/
+.panel button{
+  position: relative;
+  left: 133px;
+}
 
 .panel div.header{
     text-align: center;
@@ -1132,8 +1149,7 @@ body {
 .pull-me {
 	display:block;
     position:relative;
-    right:-25px;
-    width:150px;
+    width:250px;
     height:50px;
 	font-family:arial,sans-serif;
     font-size:14px;
@@ -1161,7 +1177,7 @@ body {
 button {
 	position:relative;
 	border:0;
-	margin:0;
+    margin-top:15px;
 	padding:0;
 	cursor:pointer;
 	font-size:1rem;
