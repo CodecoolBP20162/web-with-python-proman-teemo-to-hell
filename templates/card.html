@@ -6,7 +6,7 @@
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.1.min.js"></script>
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:400, 700&subset=latin,latin-ext" rel="stylesheet"
           type="text/css">
-    <link rel="stylesheet" href="../static/bootstrap.css" type="text/css">
+    <link rel="stylesheet" href="../static/css/bootstrap.css" type="text/css">
 
 </head>
 <body>
@@ -24,11 +24,22 @@
             </div>
         </div>
     </div>
-
-    <!--<ul id="grid-wrapper"></ul>-->
-
 </header>
 
-<script src="static/java.js"></script>
+<div id="container-head">
+    <p></p>
+    <div class="panel">
+                <div class="header">Tábla készítése</div>
+                <b>Cím</b>
+                <form>
+                    <input id="card_name" type="text" name="name" placeholder="Például játék fejlesztési terv">
+
+                    <button id="save_card_button" data-label="do it!">do it!</button>
+                </form>
+    </div>
+            <p class="slide"></p>
+            <div class="pull-me">Új kártya létrehozása..</div>
+</div>
+<script src="static/js/java.js"></script>
 </body>
 </html>

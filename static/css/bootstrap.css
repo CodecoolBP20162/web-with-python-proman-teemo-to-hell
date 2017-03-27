@@ -1044,12 +1044,12 @@ header nav a:hover {
   font-size:30px;
 }
 
-.card:hover{
+.board:hover{
   background: grey;
   box-shadow:inset 0 0 0 10px rgba(0,0,0);
 }
 
-.card{
+.board{
   position:relative;
   display: inline-block;
   width:250px;
@@ -1073,7 +1073,7 @@ header nav a:hover {
 }
 
 
-.card-title{
+.board-title{
   top: 50%;
   transform: translateY(-50%);
   position:relative;
@@ -1102,7 +1102,7 @@ header nav a:hover {
   transition: all 225ms ease-in-out;
 }
 
-.container-card {
+.container-board {
   color:white;
   font-size:23px;
 }

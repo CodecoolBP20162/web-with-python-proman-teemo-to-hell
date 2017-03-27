@@ -6,7 +6,7 @@
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.1.min.js"></script>
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:400, 700&subset=latin,latin-ext" rel="stylesheet"
           type="text/css">
-    <link rel="stylesheet" href="../static/bootstrap.css" type="text/css">
+    <link rel="stylesheet" href="../static/css/bootstrap.css" type="text/css">
 
 </head>
 <body>
@@ -27,42 +27,40 @@
 </header>
 
 
+
 <div id="container-head">
     <p>Személyes táblák</p>
 
     <div class="panel">
-            <div class="header">Tábla készítése</div>
-            <b>Cím</b>
+        <div class="header">Tábla készítése</div>
+        <b>Cím</b>
         <form>
             <input id="textform" type="text" name="name" placeholder="Például játék fejlesztési terv">
 
             <button id="save-button" data-label="do it!">do it!</button>
         </form>
     </div>
-        <p class="slide">
-        <div class="pull-me">Új tábla létrehozása..</div></p>
+    <p class="slide"></p>
+    <div class="pull-me">Új tábla létrehozása..</div>
 
     <ul id="grid-wrapper">
 
-        <li class="card">
+        <li class="board">
             <a href="/b" id="0">
 
-            <div class="container-card"></div>
-            <div class="title-bar">
-                <div class="card-title">Üdvözlő kártya</div>
-            </div>
-        </a>
+                <div class="container-board"></div>
+                <div class="title-bar">
+                    <div class="board-title">Üdvözlő kártya</div>
+                </div>
+            </a>
         </li>
 
 
+    </ul>
+</div>
 
 
-    </ul></div>
-
-
-
-
-<script src="static/java.js"></script>
+<script src="static/js/java.js"></script>
 </body>
 </html>
 

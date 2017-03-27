@@ -10,7 +10,7 @@ def index():
 
 @app.route('/b', methods=['GET', 'POST'])
 def tables():
-    return render_template('tables.html')
+    return render_template('card.html')
 
 
 
