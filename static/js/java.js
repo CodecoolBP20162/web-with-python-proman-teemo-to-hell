@@ -67,7 +67,14 @@ $(document).ready(function () {
 
     });
 
-
+    $('#textform').keydown(function (event) {
+    var keypressed = event.keyCode || event.which;
+    if (keypressed == 13) {
+        title=$("#textform").val();
+        createBoardObject(title);
+        clearTextfield();
+    }
+    });
 
 });
 
