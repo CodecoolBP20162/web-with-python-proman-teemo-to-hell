@@ -66,15 +66,11 @@ button {
     padding:3px 10px 3px 10px;
     border-radius:5px;
 }
-button:hover {
+/*button:hover {
     background:#2d70ec;
     color: #fff;
     padding:3px 10px 3px 10px;
-}
-
-.btn {
-
-}
+}*/
 
 
 /*button stuff end
@@ -84,3 +80,31 @@ button:hover {
     height:250px;
     width:100%;
 }
+
+.status {
+    height: 100%;
+    background-color: lightgray;
+    border-radius: 10px;
+}
+
+#modal-row, #modal-container, .col-xs-3{
+    height: 100%;
+}
+
+.card-header {
+    margin-top: 10px;
+    margin-right: 1px;
+    border-bottom: solid;
+    height: 40px;
+    font-family: 'Ubuntu', 'Lucida Grande', 'Lucida Sans Unicode', 'Geneva', 'Verdana', sans-serif;
+    font-weight: bold;
+}
+
+.card-header h4 {
+    float: left;
+}
+
+#card-new-new, #card-in-progress-new, #card-review-new, #card-done-new {
+    float: right;
+}
+
