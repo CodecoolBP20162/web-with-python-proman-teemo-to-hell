@@ -1,67 +1,56 @@
 /**
  * Created by bezi on 2017.03.13..
  */
-$.getScript("static/js/data_manager.js", function(){
-});
 
 
 function clearTextfield() {
     document.getElementById('textform').value = "";
 }
 
-function createBoardObject(title, description=false) {
+function clearLocalStorage() {
+    localStorage.clear();
+}
+
+
+function createBoardObject(title) {
     var board_object = {};
-    var target = $("#grid-wrapper");
+    var target = $(".row");
     var board_id = target.children().length;
+    // localstorage leguccsó elemének[localStorage.length-1] a key-e +1
 
     board_object.title = title;
-    board_object.id = board_id;
-    board_object.description = description;
 
     var board_name = "board" + board_id;
     var board_content = JSON.stringify(board_object);
     Data_manager.set_data(board_name, board_content);
-    showBoard(title);
+    showBoard(title, board_name);
 }
 
-function showBoard(title, description='') {
+function showBoard(title,button_data) {
+    var button = button_data;
+    var target = $(".row");
 
-    var target = $("#grid-wrapper");
-    var newboard = "<li class='board'>" +
-        "<div class='container-board'>"
-        + description +
-        "</div><a href='/b' id='0'>" +
-        "<div class='title-bar'>" +
-        "<div class='board-title'>" + title + "</div>" +
-        "</div>" +
-        "</a>" +
-        "</li>";
-
-    target.append(newboard);
+    var $card = $('<div/>', {'id': 'post-its'}).append($('<div/>', {'id': 'post-it-container'}).append($('<div/>', {'id': 'post-it-card'}, {'class': 'shadow'}).append($('<div/>', {'class': 'front face'}).append($('<div/>', {'class': 'strategy'}).text(title)
+        )).append($('<div/>', {'class': 'back face center','data-toggle':'modal','data-target':'#myModal','data-button':button}).append($('<p/>',{'text':'Enter card'}))
+        ))
+    );
+    target.append($card);
 }
 
-
-// console.log(JSON.parse(localStorage.getItem(board_name)).title);
-// ezzel lehet megkapni egy kártya objektumot (még nemtom hova fog kerülni)
 
 
 $(document).ready(function () {
-
-    // localStorage.boardStorage = {};
-    // function Board(name) {
-    //     this.name = name;
-    // }
-
-    //this function clears the textfield (after pressing the button)
 
 
     for (var key in localStorage) {
         // keys store the title names
         var local_key = JSON.parse(Data_manager.get_data(key));
-        console.log(key);
+        // console.log(key);
         var title = local_key.title;
-        showBoard(title);
+        // gives the key (board number) as button-data
+        showBoard(title, key);
     }
+
 
     $("#save-button").click(function () {
         var title = $('#textform').val();
@@ -69,10 +58,7 @@ $(document).ready(function () {
             createBoardObject(title);
             clearTextfield();
 
-            //closes the window
-            setTimeout(function () {
-                $('.panel').slideToggle(600);
-            }, 800);
+
         }
         else {
             alert("Please give a title name!");
@@ -80,27 +66,11 @@ $(document).ready(function () {
 
     });
 
-    //toggles the form window
-    $('.pull-me').click(function () {
-        $('.panel').slideToggle(200);
+    $('.board-content.btn').click(function(){
+      var data = $(this).attr('data-button');
+      console.log(data);
     });
 
-
-    var loading = function (e) {
-        e.preventDefault();
-        e.stopPropagation();
-        e.target.classList.add('loading');
-        e.target.setAttribute('disabled', 'disabled');
-        setTimeout(function () {
-            e.target.classList.remove('loading');
-            e.target.removeAttribute('disabled');
-        }, 500);
-    };
-
-    var btns = document.querySelectorAll('button');
-    for (var i = btns.length - 1; i >= 0; i--) {
-        btns[i].addEventListener('click', loading);
-    }
 
 
 });

@@ -8,9 +8,10 @@ app.config.from_object(__name__)
 def index():
     return render_template('index.html')
 
-@app.route('/b', methods=['GET', 'POST'])
-def tables():
-    return render_template('card.html')
+@app.route('/test', methods=['GET', 'POST'])
+def test():
+    return render_template('tester.html')
+
 
 
 
