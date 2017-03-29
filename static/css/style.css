@@ -4,7 +4,7 @@
 }
 
 #main-page {
-    height: 400px;
+    min-height: 400px;
 }
 
     /* Remove the navbar's default rounded borders and increase the bottom margin */

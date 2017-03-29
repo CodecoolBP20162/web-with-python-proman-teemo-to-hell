@@ -6,10 +6,9 @@
   height: 13.5em;
   z-index: 1;
   float:left;
+  margin:15px;
 }
-#post-it-container {
-    margin:15px;
-}
+
 #post-it-card {
   width: 100%;
   height: 100%;
