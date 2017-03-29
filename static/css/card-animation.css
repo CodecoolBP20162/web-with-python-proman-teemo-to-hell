@@ -6,9 +6,10 @@
   height: 13.5em;
   z-index: 1;
   float:left;
-  margin:15px;
 }
-
+#post-it-container {
+    margin:15px;
+}
 #post-it-card {
   width: 100%;
   height: 100%;
@@ -41,7 +42,7 @@ box-shadow: 2px 2px 9px rgba(194,194,194,.9);
 }
 
 div.strategy {
-margin:0px;
+/*margin:0px;*/
 float: left;
 color: #151515;
 background: #ffc;

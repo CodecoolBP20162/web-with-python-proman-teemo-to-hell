@@ -16,21 +16,25 @@ function createBoardObject(title) {
     var board_object = {};
     var target = $(".row");
     var board_id = target.children().length;
+    // localstorage leguccsó elemének[localStorage.length-1] a key-e +1
 
     board_object.title = title;
 
     var board_name = "board" + board_id;
     var board_content = JSON.stringify(board_object);
     Data_manager.set_data(board_name, board_content);
-    showBoard(title);
+    showBoard(title, board_name);
 }
 
-function showBoard(title) {
-
+function showBoard(title,button_data) {
+    var button = button_data;
     var target = $(".row");
-    var newboard =  '<div class="post-its"'+'<div id="post-it-container">'+'<div id="post-it-card" class="shadow">'+'<div class="front face">'+'<div class="strategy">'+'<p style="margin-top:50px;font-size:25px;">'+ title + '</p>' +'</div>'+'</div>'+'<div class="back face center">' +'<div class="delete-modal">x</div>'+'<div style="margin-top:50px;font-size:23px;" class="board-content btn" data-toggle="modal" data-button="fax" data-target="#myModal">Enter card</div>'+'</div>'+'</div>'+'</div>';
-    // var $newboard = $('<div />', {'class':'post-its'}).append($('<div/>', {'class':'post-it-card'}'))
-    target.append(newboard);
+
+    var $card = $('<div/>', {'id': 'post-its'}).append($('<div/>', {'id': 'post-it-container'}).append($('<div/>', {'id': 'post-it-card'}, {'class': 'shadow'}).append($('<div/>', {'class': 'front face'}).append($('<div/>', {'class': 'strategy'}).text(title)
+        )).append($('<div/>', {'class': 'back face center','data-toggle':'modal','data-target':'#myModal','data-button':button}).append($('<p/>',{'text':'Enter card'}))
+        ))
+    );
+    target.append($card);
 }
 
 
@@ -43,16 +47,10 @@ $(document).ready(function () {
         var local_key = JSON.parse(Data_manager.get_data(key));
         // console.log(key);
         var title = local_key.title;
-        showBoard(title);
+        // gives the key (board number) as button-data
+        showBoard(title, key);
     }
 
-
-    // $('.commentarea').keydown(function(event) {
-    //     if (event.keyCode == 13) {
-    //         this.form.submit();
-    //         return false;
-    //      }
-    // });
 
     $("#save-button").click(function () {
         var title = $('#textform').val();
