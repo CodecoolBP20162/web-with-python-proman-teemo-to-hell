@@ -75,6 +75,10 @@ $(document).ready(function () {
             createBoardObject(title);
             clearTextfield();
         }
+        else
+        {
+            alert("Please add a name to your card!")
+        }
     }
     });
 
