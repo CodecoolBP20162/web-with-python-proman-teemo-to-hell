@@ -28,10 +28,19 @@ function createBoardObject(title) {
 function showBoard(title) {
 
     var target = $(".row");
-    var newboard =  '<div class="post-its"'+'<div id="post-it-container">'+'<div id="post-it-card" class="shadow">'+'<div class="front face">'+'<div class="strategy">'+'<p style="margin-top:50px;font-size:25px;">'+ title + '</p>' +'</div>'+'</div>'+'<div class="back face center">' +'<div class="delete-modal">x</div>'+'<div style="margin-top:50px;font-size:23px;" class="board-content btn" data-toggle="modal" data-target="#myModal">Enter card</div>'+'</div>'+'</div>'+'</div>';
+    var newboard = '<div class="post-its"' + '<div id="post-it-container">' + '<div id="post-it-card" class="shadow">' + '<div class="front face">' + '<div class="strategy">' + '<p style="margin-top:50px;font-size:25px;">' + title + '</p>' + '</div>' + '</div>' + '<div class="back face center">' + '<div class="delete-modal">x</div>' + '<div style="margin-top:50px;font-size:23px;" class="board-content btn" data-toggle="modal" data-target="#myModal">Enter card</div>' + '</div>' + '</div>' + '</div>';
     target.append(newboard);
 }
-
+function save_board() {
+    var title = $('#textform').val();
+    if (title.length > 0) {
+        createBoardObject(title);
+        clearTextfield();
+    }
+    else {
+        alert("Please add a name to your card!");
+    }
+}
 
 
 $(document).ready(function () {
@@ -54,36 +63,16 @@ $(document).ready(function () {
     // });
 
     $("#save-button").click(function () {
-        var title = $('#textform').val();
-        if ($('#textform').val().length > 0){
-            createBoardObject(title);
-            clearTextfield();
-
-
-        }
-        else {
-            alert("Please give a title name!");
-        }
-
+        save_board();
     });
 
     $('#textform').keydown(function (event) {
-    var keypressed = event.keyCode || event.which;
-    if (keypressed == 13) {
-        if ($('#textform').val().length > 0) {
-            title = $("#textform").val();
-            createBoardObject(title);
-            clearTextfield();
+        var keypressed = event.keyCode || event.which;
+        if (keypressed == 13) {
+            save_board();
         }
-        else
-        {
-            alert("Please add a name to your card!")
-        }
-    }
     });
-
 });
-
 
 // title nélkül ne generáljon
 // data manager befejezése
