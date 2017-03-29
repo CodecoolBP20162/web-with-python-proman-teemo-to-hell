@@ -31,7 +31,7 @@ function showBoard(title,button_data) {
     var target = $(".row");
 
     var $card = $('<div/>', {'id': 'post-its'}).append($('<div/>', {'id': 'post-it-container'}).append($('<div/>', {'id': 'post-it-card'}, {'class': 'shadow'}).append($('<div/>', {'class': 'front face'}).append($('<div/>', {'class': 'strategy'}).text(title)
-        )).append($('<div/>', {'class': 'back face center','data-toggle':'modal','data-target':'#myModal','data-button':button}).append($('<p/>',{'text':'Enter card'}))
+        )).append($('<div/>', {'class': 'back face center','data-toggle':'modal','data-target':'#myModal','title':title,'data-id':button}).append($('<p/>',{'text':'Enter card'}))
         ))
     );
     target.append($card);
@@ -52,6 +52,7 @@ $(document).ready(function () {
     }
 
 
+
     $("#save-button").click(function () {
         var title = $('#textform').val();
         if ($('#textform').val().length > 0){
@@ -66,13 +67,24 @@ $(document).ready(function () {
 
     });
 
-    $('.board-content.btn').click(function(){
-      var data = $(this).attr('data-button');
-      console.log(data);
-    });
+    // $('.board-content.btn').click(function(){
+    //   var data = $(this).attr('data-button');
+    //   console.log(data);
+    // });
 
 
 
+});
+
+document.querySelector('body').addEventListener('click', function(event) {
+  if (event.target.className === 'back face center') {
+      // gives the key of the board element
+    var board_key = event.target.getAttribute('data-id');
+    // var board_title = event.target.getAttribute('title');
+    // console.log(board_title);
+    board_title = JSON.parse(Data_manager.get_data(board_key)).title;
+    $('.modal-header #titleName').val(board_title);
+  }
 });
 
 

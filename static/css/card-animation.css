@@ -21,7 +21,6 @@
   -moz-box-shadow: 2px 2px 9px rgba(194,194,194,.9);
 -webkit-box-shadow: 2px 2px 9px rgba(194,194,194,.9);
 box-shadow: 2px 2px 9px rgba(194,194,194,.9);
-  cursor:pointer;
 }
 .face {
   position: absolute;
