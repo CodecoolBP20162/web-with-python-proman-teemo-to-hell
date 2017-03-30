@@ -1,0 +1,11 @@
+@font-face {
+	font-family: 'KOMIKAX';
+	src: url('./KOMIKAX.eot');
+	src: local('KOMIKAX'), url('./KOMIKAX.woff') format('woff'), url('./KOMIKAX.ttf') format('truetype');
+}
+/* use this class to attach this font to any element i.e. <p class="fontsforweb_fontid_236">Text with this font applied</p> */
+.main-body {
+	font-family: 'KOMIKAX' !important;
+}
+
+/* Font downloaded from FontsForWeb.com */
