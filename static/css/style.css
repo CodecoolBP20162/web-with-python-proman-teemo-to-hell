@@ -75,7 +75,7 @@ button {
 
 /*button stuff end
 -----------------*/
-
+/* modal content */
 .modal-body {
     min-height: 400px;
     width:100%;
@@ -128,3 +128,5 @@ button {
 .status-class {
     min-height: inherit;
 }
+
+/*modal content end*/
