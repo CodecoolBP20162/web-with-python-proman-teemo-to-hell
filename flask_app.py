@@ -22,13 +22,10 @@ def add_board():
 @app.route('/get_boards', methods=['GET'])
 def get_boards():
     boards = Boards.select()
+    board_list = []
     for b in boards:
-        print(b.title)
-    board_dict = []
-    for b in boards:
-        board_dict.append({"title": b.title, "id": b.id})
-        print(board_dict)
-    return jsonify(board_dict)
+        board_list.append({"title": b.title, "id": b.id})
+    return jsonify(board_list)
 
 
 @app.route('/add_card', methods=['POST'])
@@ -36,7 +33,6 @@ def add_card():
     content = request.form['content']
     status = request.form['status']
     board_id = int(request.form['board'])
-    print(board_id)
     position = Cards.select().where(Cards.status == "new").count() + 1
     new_card = Cards.create(content=content, status=status, board=board_id, position=position)
     response = {"id": new_card.id}

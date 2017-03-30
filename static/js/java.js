@@ -7,11 +7,6 @@ function clearTextfield() {
     document.getElementById('textform').value = "";
 }
 
-function clearLocalStorage() {
-    localStorage.clear();
-}
-
-
 function createBoardObject(title) {
     $.ajax({
         url: "/add_board",
@@ -27,7 +22,6 @@ function createBoardObject(title) {
         }
     });
 }
-
 
 function showBoard(title, board_id) {
     var target = $("#board-area");
@@ -72,8 +66,7 @@ function save_board() {
     }
 }
 
-
-$(document).ready(function () {
+function get_cards() {
     $.ajax({
         url: "/get_boards",
         type: "GET",
@@ -88,9 +81,12 @@ $(document).ready(function () {
         }
 
     });
+}
+
+$(document).ready(function () {
+    get_cards()
 
     $("#save-button").click(function () {
-
         save_board();
     });
 
@@ -110,7 +106,6 @@ $(document).ready(function () {
         if (event.target.id === ('delete-board')) {
             // gives the key of the board element
             console.log($(event.target).attr('data-button'));
-            // $('#titleName').text(board_title);
         }
     });
 
