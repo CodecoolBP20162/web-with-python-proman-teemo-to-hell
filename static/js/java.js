@@ -13,41 +13,55 @@ function clearLocalStorage() {
 
 
 function createBoardObject(title) {
-    var board_object = {};
-    var target = $("#board-area");
-    var board_id = target.children().length;
-    // localstorage leguccsó elemének[localStorage.length-1] a key-e +1
-
-    board_object.title = title;
-
-    var board_name = "board" + board_id;
-    var board_content = JSON.stringify(board_object);
-    Data_manager.set_data(board_name, board_content);
-    showBoard(title, board_name);
+    $.ajax({
+        url: "/add_board",
+        data: {title: title},
+        type: "POST",
+        success: function (response) {
+            console.log("success: " + response.id)
+            var board_id = response.id;
+            showBoard(title, board_id)
+        },
+        error: function () {
+            alert("Sorry, at the moment we can't create your card :(")
+        }
+    });
 }
 
-function showBoard(title, button_data) {
-    var button = button_data;
-    var target = $("#board-area");
+    function showBoard(title, board_id) {
+        var target = $("#board-area");
+        var $card = $('<div/>', {'id': 'post-its'})
+            .append($('<div/>', {'id': 'post-it-container'})
+                .append($('<div/>', {'id': 'post-it-card'}, {'class': 'shadow'})
+                    .append($('<div/>', {'class': 'front face'})
+                        .append($('<div/>', {'class': 'strategy'}).text(title)))
+                    .append($('<span/>', {
+                        'class': 'back face center',
+                        'data-toggle': 'modal',
+                        'data-target': '#board-modal',
+                        'title': title,
+                        'data-board': board_id,
+                        'data-board-xy': board_id
+                    })
+                        .append($('<p/>', {'text': 'Enter card'})).append($('<span/>', {
+                            'class': 'glyphicon glyphicon-trash btn',
+                            'id': 'delete-board',
+                            'data-button': title
+                        })))
+                ))
+    };
 
-    var $card = $('<div/>', {'id': 'post-its'}).append($('<div/>', {'id': 'post-it-container'}).append($('<div/>', {'id': 'post-it-card'}, {'class': 'shadow'}).append($('<div/>', {'class': 'front face'}).append($('<div/>', {'class': 'strategy'}).text(title)
-        )).append($('<div/>', {'class': 'back face center'}).append($('<div/>', {
-            'text': 'Enter card',
-            'class': 'board-body',
-            'data-toggle': 'modal',
-            'data-target': '#board-modal',
-            'title': title,
-            'data-id': button
-        })).append($('<span/>', {'class': 'glyphicon glyphicon-trash btn', 'id': 'delete-board', 'data-button':title})))
-        )
-        );
-    target.append($card);
 
+target.append($card);
 }
 
-function createCard() {
-    var card = "<div class='card'><textarea contenteditable='true'></textarea></div>";
-    $("#status-new").append(card);
+function createCard(card_id) {
+    var $card = $('<div/>', {
+        'class': 'card',
+        'data-id': 'card_id'
+    }).append($('<textarea/>', {'contenteditable': 'true'}));
+    // var $text = $('<textarea/>',{'contenteditable':'true'});
+    $("#status-new").append($card);
 }
 
 function save_board() {
@@ -63,30 +77,36 @@ function save_board() {
 
 
 $(document).ready(function () {
+    $.ajax({
+        url: "/get_boards",
+        type: "GET",
+        success: function (response) {
+            for (var idx in response) {
+                var board = response[idx];
+                showBoard(board.title, board.id);
+            }
+        },
+        error: function () {
+            alert("Sorry, can not generate your cards :(")
+        }
 
-    for (var key in localStorage) {
-        // keys store the title names
-        var local_key = JSON.parse(Data_manager.get_data(key));
-        var title = local_key.title;
-        // gives the key (board number) as button-data
-        showBoard(title, key);
-    }
+    });
 
     $("#save-button").click(function () {
+
         save_board();
     });
 
-
-    document.querySelector('.row').addEventListener('click', function (event) {
-        if (event.target.className === 'board-body') {
-            // gives the key of the board element
-            var board_key = event.target.getAttribute('data-id');
-            var board_title = JSON.parse(Data_manager.get_data(board_key)).title;
-            $('#titleName').text(board_title);
-        }
-    });
-
-    document.querySelector('.row').addEventListener('click', function (event) {
+            document.querySelector('body').addEventListener('click', function (event) {
+                if (event.target.className === 'back face center') {
+                    // gives the key of the board element
+                    var board_key = event.target.getAttribute('data-board');
+                    var title = event.target.getAttribute('title');
+                    $('#titleName').text(title);
+                    $('#modal-container').data("data-board", board_key);
+                }
+            });
+        document.querySelector('.row').addEventListener('click', function (event) {
         // console.log(event.target.id);
         if (event.target.id === ('delete-board')) {
             // gives the key of the board element
@@ -95,20 +115,39 @@ $(document).ready(function () {
         }
     });
 
+        $(document).on("click", "#new-card", function () {
+            console.log("csekk: " + $("#modal-container").data("data-board"));
+            $.ajax({
+                url: "/add_card",
+                data: {
+                    content: null,
+                    status: "new",
+                    board: $("#modal-container").data("data-board")
+                },
+                type: "POST",
+                success: function (response) {
+                    createCard(response.id)
+                },
+                error: function () {
+                    alert("Sorry, at the moment we can't create your card :(")
+                }
 
-    $(document).on("click", "#new-card", function () {
-        createCard();
+            });
+        });
+
+        $("#status-new, #status-in-progress, #status-review, #status-done").sortable({
+            connectWith: ".status-class"
+
+            /*stop: function(event, ui) {
+             ui.item.index();
+             }*/
+        }).disableSelection();
+
+
+        $('#textform').keydown(function (event) {
+            var keypressed = event.keyCode || event.which;
+            if (keypressed == 13) {
+                save_board();
+            }
+        });
     });
-
-    $("#status-new, #status-in-progress, #status-review, #status-done").sortable({
-        connectWith: ".status-class"
-    }).disableSelection();
-
-
-    $('#textform').keydown(function (event) {
-        var keypressed = event.keyCode || event.which;
-        if (keypressed == 13) {
-            save_board();
-        }
-    });
-});
