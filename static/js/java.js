@@ -37,10 +37,19 @@ function createCard() {
     $("#status-new").append(card);
 }
 
+function save_board() {
+    var title = $('#textform').val();
+    if (title.length > 0) {
+        createBoardObject(title);
+        clearTextfield();
+    }
+    else {
+        alert("Please add a name to your card!");
+    }
+}
 
 
 $(document).ready(function () {
-
 
     for (var key in localStorage) {
         // keys store the title names
@@ -50,23 +59,8 @@ $(document).ready(function () {
         showBoard(title);
     }
 
-
-    // $('.commentarea').keydown(function(event) {
-    //     if (event.keyCode == 13) {
-    //         this.form.submit();
-    //         return false;
-    //      }
-    // });
-
     $("#save-button").click(function () {
-        var title = $('#textform').val();
-        if ($('#textform').val().length > 0){
-            createBoardObject(title);
-            clearTextfield();
-        }
-        else {
-            alert("Please give a title name!");
-        }
+        save_board();
     });
 
     $(document).on("click", "#new-card", function () {
@@ -78,8 +72,10 @@ $(document).ready(function () {
     }).disableSelection();
 
 
+    $('#textform').keydown(function (event) {
+        var keypressed = event.keyCode || event.which;
+        if (keypressed == 13) {
+            save_board();
+        }
+    });
 });
-
-
-// title nélkül ne generáljon
-// data manager befejezése
