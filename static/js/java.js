@@ -26,14 +26,21 @@ function createBoardObject(title) {
     showBoard(title, board_name);
 }
 
-function showBoard(title,button_data) {
+function showBoard(title, button_data) {
     var button = button_data;
     var target = $("#board-area");
 
     var $card = $('<div/>', {'id': 'post-its'}).append($('<div/>', {'id': 'post-it-container'}).append($('<div/>', {'id': 'post-it-card'}, {'class': 'shadow'}).append($('<div/>', {'class': 'front face'}).append($('<div/>', {'class': 'strategy'}).text(title)
-        )).append($('<div/>', {'class': 'back face center','data-toggle':'modal','data-target':'#board-modal','title':title,'data-id':button}).append($('<p/>',{'text':'Enter card'}))
-        ))
-    );
+        )).append($('<div/>', {'class': 'back face center'}).append($('<div/>', {
+            'text': 'Enter card',
+            'class': 'board-body',
+            'data-toggle': 'modal',
+            'data-target': '#board-modal',
+            'title': title,
+            'data-id': button
+        })).append($('<span/>', {'class': 'glyphicon glyphicon-trash btn', 'id': 'delete-board', 'data-button':title})))
+        )
+        );
     target.append($card);
 
 }
@@ -70,18 +77,28 @@ $(document).ready(function () {
     });
 
 
-    document.querySelector('body').addEventListener('click', function(event) {
-      if (event.target.className === 'back face center') {
-          // gives the key of the board element
-        var board_key = event.target.getAttribute('data-id');
-        var board_title = JSON.parse(Data_manager.get_data(board_key)).title;
-        $('#titleName').text(board_title);
-      }});
+    document.querySelector('.row').addEventListener('click', function (event) {
+        if (event.target.className === 'board-body') {
+            // gives the key of the board element
+            var board_key = event.target.getAttribute('data-id');
+            var board_title = JSON.parse(Data_manager.get_data(board_key)).title;
+            $('#titleName').text(board_title);
+        }
+    });
+
+    document.querySelector('.row').addEventListener('click', function (event) {
+        // console.log(event.target.id);
+        if (event.target.id === ('delete-board')) {
+            // gives the key of the board element
+            console.log($(event.target).attr('data-button'));
+            // $('#titleName').text(board_title);
+        }
+    });
 
 
     $(document).on("click", "#new-card", function () {
         createCard();
-        });
+    });
 
     $("#status-new, #status-in-progress, #status-review, #status-done").sortable({
         connectWith: ".status-class"

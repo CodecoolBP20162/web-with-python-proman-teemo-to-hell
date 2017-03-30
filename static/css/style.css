@@ -47,6 +47,11 @@
     height: 100%;
 }
 
+.board-body {
+    height: 80%;
+    cursor: pointer;
+}
+
 .panel-body {
     height: 180px;
     box-shadow: 20px 80px 50px #888888;
