@@ -5,10 +5,10 @@
     <meta charset="utf-8">
     <link rel="shortcut icon" href="static/img/favicon.png">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-{#    <link href="static/css/bootstrap.css" rel="stylesheet"/>#}
     <link href="static/css/card-animation.css" rel="stylesheet"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link href="static/css/style.css" rel="stylesheet"/>
 
@@ -26,80 +26,100 @@
 <div class="main-body">
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
-            <!--<div class="navbar-header">-->
-                <!--<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">-->
-                <!--<span class="icon-bar"></span>-->
-                <!--<span class="icon-bar"></span>-->
-                <!--<span class="icon-bar"></span>-->
-                <!--</button>-->
-                <div class="navbar-brand" style="cursor: pointer;" onclick="clearLocalStorage()">Delete local storage</div>
-            <!--</div>-->
-            <!--<div class="collapse navbar-collapse" id="myNavbar">-->
-                <!--<ul class="nav navbar-nav">-->
-                    <!--&lt;!&ndash;<li class="active"><a href="#">Home</a></li>&ndash;&gt;-->
-                    <!--&lt;!&ndash;<li><a href="#">Products</a></li>&ndash;&gt;-->
-                    <!--&lt;!&ndash;<li><a href="#">Deals</a></li>&ndash;&gt;-->
-                    <!--&lt;!&ndash;<li><a href="#">Stores</a></li>&ndash;&gt;-->
-                    <!--&lt;!&ndash;<li><a href="#">Contact</a></li>&ndash;&gt;-->
-                <!--</ul>-->
-                <!--&lt;!&ndash;<ul class="nav navbar-nav navbar-right">&ndash;&gt;-->
-                <!--&lt;!&ndash;<li><a href="#"><span class="glyphicon glyphicon-user"></span> Your Account</a></li>&ndash;&gt;-->
-                <!--&lt;!&ndash;<li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>&ndash;&gt;-->
-                <!--&lt;!&ndash;</ul>&ndash;&gt;-->
-            <!--</div>-->
+            <div class="navbar-brand" style="cursor: pointer;" onclick="clearLocalStorage()">Delete local storage</div>
         </div>
     </nav>
-
     <div class="container" id="main-page">
-        <div class="row">
+        <div class="row" id="board-area">
+            <div class="post-its">
+                <div id="post-it-container">
+                    <div id="post-it-card" class="shadow">
+                        <div class="front face">
+                            <div class="strategy">Create your very own card</div>
+                        </div>
+                        <div class="back face center">
+                            <p>Give a name to your card</p>
+                            <input style="margin-bottom:20px;" id="textform" type="text" name="name"
+                                   placeholder="cardname">
+                            <button type="submit" id="save-button" data-label="save">save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+</div>
 
-                <div class="post-its">
-
-                    <div id="post-it-container">
-                        <div id="post-it-card" class="shadow">
-                            <div class="front face">
-                                <div class="strategy">Create your very own card</div>
+<div class="container-fluid">
+    <div id="board-modal" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg" style="width: 100%">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title" id="titleName"></h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row" id="modal-row">
+                        <div class="container" id="modal-container">
+                            <div class="col-xs-3">
+                                <div class="col-xs-12 status">
+                                    <div class="status-header">
+                                        <h4>new</h4>
+                                        <button class="btn btn-primary" id="new-card">new card</button>
+                                    </div>
+                                    <div id="status-new" class="status-class">
+                                    </div>
+                                </div>
                             </div>
-                            <div class="back face center">
-                                <p>Give a name to your card</p>
-
-                                <!--nem lehet elküldeni enterrel-->
-                                <input style="margin-bottom:20px;" id="textform" type="text" name="name" placeholder="cardname">
-                                <button type="submit" id="save-button" data-label="save">save</button>
+                            <div class="col-xs-3">
+                                <div class="col-xs-12 status">
+                                    <div class="status-header">
+                                        <h4>in progress</h4>
+                                    </div>
+                                    <div id="status-in-progress" class="status-class">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-3">
+                                <div class="col-xs-12 status" id="status-review">
+                                    <div class="status-header">
+                                        <h4>review</h4>
+                                    </div>
+                                    <div id="status-review" class="status-class">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-3">
+                                <div class="col-xs-12 status" id="status-done">
+                                    <div class="status-header">
+                                        <h4>done</h4>
+                                    </div>
+                                    <div id="status-done" class="status-class">
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <div class="modal-footer">
+                    <button type="button" id="#save-card" data-dismiss="modal">Save card</button>
+                </div>
+            </div>
 
+            </div>
         </div>
-    <br></div></div>
-
-<div id="myModal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <input type="text" name="title" class="modal-title" id="titleName" value=""/>
-      </div>
-      <textarea class="modal-body">
-      </textarea>
-      <div class="modal-footer">
-        <button type="button" id="#save-card" data-dismiss="modal">Save card</button>
-      </div>
     </div>
 
-  </div>
-</div>
 
-<footer class="container-fluid text-center">
-    <p>This website was designed by the team members of Teemo to Hell.</p>
-</footer>
+    <footer class="container-fluid text-center">
+        <p>This website was designed by the team members of Teemo to Hell.</p>
+    </footer>
 
-<!--scripts-->
-<script src="static/js/data_manager.js"></script>
-<script src="static/js/java.js"></script>
-<!---->
+    <!--scripts-->
+    <script src="static/js/data_manager.js"></script>
+    <script src="static/js/java.js"></script>
+    <!---->
 </body>
 </html>

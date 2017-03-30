@@ -75,21 +75,74 @@ button {
     padding:3px 10px 3px 10px;
     border-radius:5px;
 }
-button:hover {
+/*button:hover {
     background:#2d70ec;
     color: #fff;
     padding:3px 10px 3px 10px;
-}
-
-.btn {
-
-}
+}*/
 
 
 /*button stuff end
 -----------------*/
-
+/* modal content */
 .modal-body {
-    height:250px;
+    min-height: 400px;
     width:100%;
 }
+
+.status {
+    height: 100%;
+    background-color: lightgray;
+    border-radius: 10px;
+}
+
+#modal-row, #modal-container, .col-xs-3, .col-xs-12{
+    min-height: 400px;
+}
+
+.col-xs-3 {
+    min-width: 180px;
+    margin-bottom: 20px;
+}
+
+.status-header {
+    margin-top: 10px;
+    margin-right: 1px;
+    border-bottom: solid;
+    height: 40px;
+    font-family: 'Ubuntu', 'Lucida Grande', 'Lucida Sans Unicode', 'Geneva', 'Verdana', sans-serif;
+    font-weight: bold;
+}
+
+.status-header h4 {
+    float: left;
+}
+
+#new-card {
+    float: right;
+}
+
+.card {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: black;
+    min-height: 100px;
+    border-width: thick;
+    border-color: black;
+    text-align: center;
+    padding-bottom: 15px;
+    padding-top: 10px;
+}
+
+.card textarea {
+    resize: none;
+    width:100%;
+    margin-top: 10px;
+    min-height: 80px;
+}
+
+.status-class {
+    min-height: inherit;
+}
+
+/*modal content end*/

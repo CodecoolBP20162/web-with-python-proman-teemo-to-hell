@@ -14,7 +14,7 @@ function clearLocalStorage() {
 
 function createBoardObject(title) {
     var board_object = {};
-    var target = $(".row");
+    var target = $("#board-area");
     var board_id = target.children().length;
     // localstorage leguccsó elemének[localStorage.length-1] a key-e +1
 
@@ -28,65 +28,70 @@ function createBoardObject(title) {
 
 function showBoard(title,button_data) {
     var button = button_data;
-    var target = $(".row");
+    var target = $("#board-area");
 
     var $card = $('<div/>', {'id': 'post-its'}).append($('<div/>', {'id': 'post-it-container'}).append($('<div/>', {'id': 'post-it-card'}, {'class': 'shadow'}).append($('<div/>', {'class': 'front face'}).append($('<div/>', {'class': 'strategy'}).text(title)
-        )).append($('<div/>', {'class': 'back face center','data-toggle':'modal','data-target':'#myModal','title':title,'data-id':button}).append($('<p/>',{'text':'Enter card'}))
+        )).append($('<div/>', {'class': 'back face center','data-toggle':'modal','data-target':'#board-modal','title':title,'data-id':button}).append($('<p/>',{'text':'Enter card'}))
         ))
     );
     target.append($card);
+
 }
 
+function createCard() {
+    var card = "<div class='card'><textarea contenteditable='true'></textarea></div>";
+    $("#status-new").append(card);
+}
+
+function save_board() {
+    var title = $('#textform').val();
+    if (title.length > 0) {
+        createBoardObject(title);
+        clearTextfield();
+    }
+    else {
+        alert("Please add a name to your card!");
+    }
+}
 
 
 $(document).ready(function () {
 
-
     for (var key in localStorage) {
         // keys store the title names
         var local_key = JSON.parse(Data_manager.get_data(key));
-        // console.log(key);
         var title = local_key.title;
         // gives the key (board number) as button-data
         showBoard(title, key);
     }
 
-
-
     $("#save-button").click(function () {
-        var title = $('#textform').val();
-        if ($('#textform').val().length > 0){
-            createBoardObject(title);
-            clearTextfield();
-
-
-        }
-        else {
-            alert("Please give a title name!");
-        }
-
+        save_board();
     });
 
-    // $('.board-content.btn').click(function(){
-    //   var data = $(this).attr('data-button');
-    //   console.log(data);
-    // });
+
+    document.querySelector('body').addEventListener('click', function(event) {
+      if (event.target.className === 'back face center') {
+          // gives the key of the board element
+        var board_key = event.target.getAttribute('data-id');
+        var board_title = JSON.parse(Data_manager.get_data(board_key)).title;
+        $('#titleName').text(board_title);
+      }});
 
 
+    $(document).on("click", "#new-card", function () {
+        createCard();
+        });
 
+    $("#status-new, #status-in-progress, #status-review, #status-done").sortable({
+        connectWith: ".status-class"
+    }).disableSelection();
+
+
+    $('#textform').keydown(function (event) {
+        var keypressed = event.keyCode || event.which;
+        if (keypressed == 13) {
+            save_board();
+        }
+    });
 });
-
-document.querySelector('body').addEventListener('click', function(event) {
-  if (event.target.className === 'back face center') {
-      // gives the key of the board element
-    var board_key = event.target.getAttribute('data-id');
-    // var board_title = event.target.getAttribute('title');
-    // console.log(board_title);
-    board_title = JSON.parse(Data_manager.get_data(board_key)).title;
-    $('.modal-header #titleName').val(board_title);
-  }
-});
-
-
-// title nélkül ne generáljon
-// data manager befejezése
