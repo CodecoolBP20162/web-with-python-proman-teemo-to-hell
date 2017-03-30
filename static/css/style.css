@@ -8,11 +8,8 @@
 }
 
 
-#textform {
-    margin-bottom: 10px;
-}
-
 #main-page {
+    font-family: 'KOMIKAX';
     min-height: 400px;
 }
 
@@ -25,10 +22,11 @@
 /* Remove the jumbotron's default bottom margin */
 .jumbotron {
     /*padding-bottom:60px;*/
+    font-family: 'KOMIKAX';
     color: ghostwhite;
     margin-bottom: 0;
     text-transform: capitalize;
-    font-family: monospace;
+    /*font-family: monospace;*/
     letter-spacing: -2px;
     background-image: url(../img/header.jpg);
     background-position: center;
@@ -36,6 +34,12 @@
     background-size: cover;
     position: relative;
     text-shadow: 2px 2px #ff0000;
+}
+
+
+#textform {
+    margin-bottom: 10px;
+    font-family: 'monospace';
 }
 
 .container {
@@ -115,7 +119,7 @@ button {
     margin-right: 1px;
     border-bottom: solid;
     height: 40px;
-    font-family: 'Ubuntu', 'Lucida Grande', 'Lucida Sans Unicode', 'Geneva', 'Verdana', sans-serif;
+    /*font-family: 'Ubuntu', 'Lucida Grande', 'Lucida Sans Unicode', 'Geneva', 'Verdana', sans-serif;*/
     font-weight: bold;
 }
 
@@ -125,7 +129,7 @@ button {
 
 #new-card {
     float: right;
-    font-family: 'KOMIKAX';
+    display:inline-block;
 }
 
 .card {
@@ -162,11 +166,4 @@ button {
     font-family: 'KOMIKAX'
 }
 
-p {
-    font-family: 'KOMIKAX';
-}
-
-.back face center {
-    font-family: 'KOMIKAX';
-}
 /*modal content end*/

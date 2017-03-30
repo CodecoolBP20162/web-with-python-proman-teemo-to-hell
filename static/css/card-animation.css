@@ -54,12 +54,12 @@ div.strategy {
     width: 202.5px;
     padding: 0.5em;
     text-align: center;
-    font-family: "Gloria Hallelujah", "Lato", "Helvetica Neue", Arial, sans-serif;
+    /*font-family: "Gloria Hallelujah", "Lato", "Helvetica Neue", Arial, sans-serif;*/
     font-size: 2.5rem;
     -moz-box-shadow: 2px 2px 9px rgba(194, 194, 194, .5);
     -webkit-box-shadow: 2px 2px 9px rgba(194, 194, 194, .5);
     box-shadow: 2px 2px 9px rgba(194, 194, 194, .5);
-    font-family: 'KOMIKAX';/*asdsad*/
+    font-family: 'KOMIKAX';
 }
 
 .post-its {
