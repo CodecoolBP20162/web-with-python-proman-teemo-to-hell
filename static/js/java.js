@@ -28,32 +28,28 @@ function createBoardObject(title) {
     });
 }
 
-    function showBoard(title, board_id) {
-        var target = $("#board-area");
-        var $card = $('<div/>', {'id': 'post-its'})
-            .append($('<div/>', {'id': 'post-it-container'})
-                .append($('<div/>', {'id': 'post-it-card'}, {'class': 'shadow'})
-                    .append($('<div/>', {'class': 'front face'})
-                        .append($('<div/>', {'class': 'strategy'}).text(title)))
-                    .append($('<span/>', {
-                        'class': 'back face center',
-                        'data-toggle': 'modal',
-                        'data-target': '#board-modal',
-                        'title': title,
-                        'data-board': board_id,
-                        'data-board-xy': board_id
-                    })
-                        .append($('<p/>', {'text': 'Enter card'})).append($('<span/>', {
-                            'class': 'glyphicon glyphicon-trash btn',
-                            'id': 'delete-board',
-                            'data-button': title
-                        })))
-                ))
-    };
 
-
-target.append($card);
+function showBoard(title, board_id) {
+    var target = $("#board-area");
+    var $card = $('<div/>', {'id': 'post-it-container', 'data-board': board_id})
+            .append($('<div/>', {'id': 'post-it-card'}, {'class': 'shadow'})
+                .append($('<div/>', {'class': 'front face'})
+                    .append($('<div/>', {'class': 'strategy'}).text(title))).append($('<div/>', {'class': 'back face center'}).append($('<div/>', {
+                    'text': 'Enter card',
+                    'class': 'board-body',
+                    'data-toggle': 'modal',
+                    'data-target': '#board-modal',
+                    'title': title
+                })).append($('<span/>', {
+                    'class': 'glyphicon glyphicon-trash btn',
+                    'id': 'delete-board',
+                    'data-button': title,
+                    'data-board': board_id
+                })))
+            );
+    target.append($card);
 }
+
 
 function createCard(card_id) {
     var $card = $('<div/>', {
@@ -97,16 +93,16 @@ $(document).ready(function () {
         save_board();
     });
 
-            document.querySelector('body').addEventListener('click', function (event) {
-                if (event.target.className === 'back face center') {
-                    // gives the key of the board element
-                    var board_key = event.target.getAttribute('data-board');
-                    var title = event.target.getAttribute('title');
-                    $('#titleName').text(title);
-                    $('#modal-container').data("data-board", board_key);
-                }
-            });
-        document.querySelector('.row').addEventListener('click', function (event) {
+    document.querySelector('body').addEventListener('click', function (event) {
+        if (event.target.className === 'back face center') {
+            // gives the key of the board element
+            var board_key = event.target.getAttribute('data-board');
+            var title = event.target.getAttribute('title');
+            $('#titleName').text(title);
+            $('#modal-container').data("data-board", board_key);
+        }
+    });
+    document.querySelector('.row').addEventListener('click', function (event) {
         // console.log(event.target.id);
         if (event.target.id === ('delete-board')) {
             // gives the key of the board element
@@ -115,39 +111,39 @@ $(document).ready(function () {
         }
     });
 
-        $(document).on("click", "#new-card", function () {
-            console.log("csekk: " + $("#modal-container").data("data-board"));
-            $.ajax({
-                url: "/add_card",
-                data: {
-                    content: null,
-                    status: "new",
-                    board: $("#modal-container").data("data-board")
-                },
-                type: "POST",
-                success: function (response) {
-                    createCard(response.id)
-                },
-                error: function () {
-                    alert("Sorry, at the moment we can't create your card :(")
-                }
-
-            });
-        });
-
-        $("#status-new, #status-in-progress, #status-review, #status-done").sortable({
-            connectWith: ".status-class"
-
-            /*stop: function(event, ui) {
-             ui.item.index();
-             }*/
-        }).disableSelection();
-
-
-        $('#textform').keydown(function (event) {
-            var keypressed = event.keyCode || event.which;
-            if (keypressed == 13) {
-                save_board();
+    $(document).on("click", "#new-card", function () {
+        console.log("csekk: " + $("#modal-container").data("data-board"));
+        $.ajax({
+            url: "/add_card",
+            data: {
+                content: null,
+                status: "new",
+                board: $("#modal-container").data("data-board")
+            },
+            type: "POST",
+            success: function (response) {
+                createCard(response.id)
+            },
+            error: function () {
+                alert("Sorry, at the moment we can't create your card :(")
             }
+
         });
     });
+
+    $("#status-new, #status-in-progress, #status-review, #status-done").sortable({
+        connectWith: ".status-class"
+
+        /*stop: function(event, ui) {
+         ui.item.index();
+         }*/
+    }).disableSelection();
+
+
+    $('#textform').keydown(function (event) {
+        var keypressed = event.keyCode || event.which;
+        if (keypressed == 13) {
+            save_board();
+        }
+    });
+});
