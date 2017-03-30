@@ -28,8 +28,13 @@ function createBoardObject(title) {
 function showBoard(title) {
 
     var target = $("#board-area");
-    var newboard =  '<div class="post-its"'+'<div id="post-it-container">'+'<div id="post-it-card" class="shadow">'+'<div class="front face">'+'<div class="strategy">'+'<p style="margin-top:50px;font-size:25px;">'+ title + '</p>' +'</div>'+'</div>'+'<div class="back face center">' +'<div class="delete-modal">x</div>'+'<div style="margin-top:50px;font-size:23px;" class="board-content btn" data-toggle="modal" data-target="#myModal">Enter card</div>'+'</div>'+'</div>'+'</div>';
+    var newboard =  '<div class="post-its"'+'<div id="post-it-container">'+'<div id="post-it-card" class="shadow">'+'<div class="front face">'+'<div class="strategy">'+'<p style="margin-top:50px;font-size:25px;">'+ title + '</p>' +'</div>'+'</div>'+'<div class="back face center">' +'<div class="delete-modal">x</div>'+'<div style="margin-top:50px;font-size:23px;" class="board-content btn" data-toggle="modal" data-target="#board-modal">Enter card</div>'+'</div>'+'</div>'+'</div>';
     target.append(newboard);
+}
+
+function createCard() {
+    var card = "<div class='card'><textarea contenteditable='true'></textarea></div>";
+    $("#status-new").append(card);
 }
 
 
@@ -58,15 +63,19 @@ $(document).ready(function () {
         if ($('#textform').val().length > 0){
             createBoardObject(title);
             clearTextfield();
-
-
         }
         else {
             alert("Please give a title name!");
         }
-
     });
 
+    $(document).on("click", "#new-card", function () {
+        createCard();
+        });
+
+    $("#status-new, #status-in-progress, #status-review, #status-done").sortable({
+        connectWith: ".status-class"
+    }).disableSelection();
 
 
 });
