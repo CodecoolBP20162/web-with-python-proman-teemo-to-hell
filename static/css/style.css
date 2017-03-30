@@ -125,12 +125,13 @@ button {
 
 #new-card {
     float: right;
+    font-family: 'KOMIKAX';
 }
 
 .card {
     margin-top: 10px;
     margin-bottom: 10px;
-    background-color: black;
+    background-color: #D3FA80;
     min-height: 100px;
     border-width: thick;
     border-color: black;
@@ -144,10 +145,28 @@ button {
     width:100%;
     margin-top: 10px;
     min-height: 80px;
+    background-color: #D3FA80;
+    border: none;
 }
 
 .status-class {
     min-height: inherit;
+    cursor: move;
+}
+@font-face {
+    font-family: 'KOMIKAX';
+    src: url('./KOMIKAX.eot');
+    src: local('KOMIKAX'), url('./KOMIKAX.woff') format('woff'), url('./KOMIKAX.ttf') format('truetype');
+}
+.fontsforweb_fontid_236 {
+    font-family: 'KOMIKAX'
 }
 
+p {
+    font-family: 'KOMIKAX';
+}
+
+.back face center {
+    font-family: 'KOMIKAX';
+}
 /*modal content end*/
