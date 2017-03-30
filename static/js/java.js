@@ -38,6 +38,7 @@ function showBoard(title, board_id) {
                     'text': 'Enter card',
                     'class': 'board-body',
                     'data-toggle': 'modal',
+                    'data-board': board_id,
                     'data-target': '#board-modal',
                     'title': title
                 })).append($('<span/>', {
@@ -94,10 +95,12 @@ $(document).ready(function () {
     });
 
     document.querySelector('body').addEventListener('click', function (event) {
-        if (event.target.className === 'back face center') {
+        // console.log(event.target.className);
+        if (event.target.className === 'board-body') {
             // gives the key of the board element
             var board_key = event.target.getAttribute('data-board');
             var title = event.target.getAttribute('title');
+            console.log(board_key);
             $('#titleName').text(title);
             $('#modal-container').data("data-board", board_key);
         }
